@@ -57,6 +57,8 @@ namespace CleanArchitecture.Infrastructure.Repositories
             existingBlog.Author = blog.Author;
             existingBlog.ImageUrl = blog.ImageUrl;
 
+            await _blogDbContext.SaveChangesAsync();
+
             return existingBlog;
         }
     }

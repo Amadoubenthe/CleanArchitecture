@@ -13,7 +13,7 @@ builder.Services.AddDbContext<BlogDbContext>(options =>
     ?? throw new InvalidOperationException("Connection string 'BlogDbContext' not found.")));
 
 builder.Services.AddScoped<IBlogRepository, BlogRepository>();
-builder.Services.AddScoped<IBlogServices, BlogServices>();
+builder.Services.AddScoped<IBlogService, BlogService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

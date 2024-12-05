@@ -3,10 +3,10 @@ using CleanArchitecture.Domain.Interfaces;
 
 namespace CleanArchitecture.Application.Services
 {
-    public class BlogServices : IBlogServices
+    public class BlogService : IBlogService
     {
         public IBlogRepository _blogRepository { get; }
-        public BlogServices(IBlogRepository blogRepository)
+        public BlogService(IBlogRepository blogRepository)
         {
             _blogRepository = blogRepository;
         }

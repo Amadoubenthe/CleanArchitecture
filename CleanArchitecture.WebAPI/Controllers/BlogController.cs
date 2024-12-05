@@ -1,6 +1,5 @@
 ﻿using CleanArchitecture.Application.Services;
 using CleanArchitecture.Domain.Entites;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CleanArchitecture.WebAPI.Controllers
@@ -9,9 +8,9 @@ namespace CleanArchitecture.WebAPI.Controllers
     [ApiController]
     public class BlogController : ControllerBase
     {
-        private readonly IBlogServices _blogService;
+        private readonly IBlogService _blogService;
 
-        public BlogController(IBlogServices blogService)
+        public BlogController(IBlogService blogService)
         {
             _blogService = blogService;
         }
@@ -40,5 +39,41 @@ namespace CleanArchitecture.WebAPI.Controllers
             var createdBlog = await _blogService.AddAsync(blog);
             return CreatedAtAction(nameof(GetById), new { id = createdBlog.Id }, createdBlog);
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateBlog(int id, Blog blog)
+        {
+            try
+            {
+                var b = _blogService.UpdateAsync(id, blog);
+                return Ok(b);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        ///<summary>
+        /// Modifier un Role et ses permissions par son Identifiant
+        ///</summary>
+        /// <param name="id"></param>
+        /// <param name="request"></param>
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> UpdateRoleAsync(string id, [FromBody] RoleRequest request)
+        //{
+        //    try
+        //    {
+        //        if (!ModelState.IsValid) return BadRequest(new Response(false, "données non valides"));
+
+        //        var result = await _roleService.UpdateRoleAsync(id, request);
+        //        return result.Data != null ? Ok(result) : NotFound(result);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(new Response(false, ex.Message));
+        //    }
+
+        //}
     }
 }
