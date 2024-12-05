@@ -9,7 +9,6 @@ namespace CleanArchitecture.Infrastructure.Data
         {
             
         }
-
         public DbSet<Blog> Blogs { get; set; }
     }
 }
